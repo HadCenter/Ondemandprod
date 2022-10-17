@@ -1,0 +1,114 @@
+
+CREATE TABLE core_logisticfile (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  logisticFile VARCHAR(100) NOT NULL,
+  logisticFileType VARCHAR(200),
+  created_at DATETIME(6),
+  status VARCHAR(200),
+  number_annomalies INT,
+  clientName VARCHAR(200) );
+
+
+
+CREATE TABLE plans_facturation (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  plan VARCHAR(45),
+  status VARCHAR(45),
+  month INT,
+  year INT,
+  numFacture INT,
+  derniere_execution date)
+
+
+    CREATE TABLE intervention_facturation_transport (
+      id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+      id_admin INT,
+      id_transaction INT,
+      execution_time DATETIME,
+      typeTransactio VARCHAR(12)
+
+    )
+
+    CREATE TABLE typeTransaction(
+      id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+      execution_time DATETIME,
+      typeTransaction DATETIME,
+    )
+
+
+
+
+CREATE TABLE matrice_facturation_preparation (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  code_client VARCHAR(45) NOT NULL,
+  nom_client VARCHAR(45) NOT NULL,
+  param VARCHAR(45) NOT NULL,
+  KEY VARCHAR(45) NOT NULL,
+  value VARCHAR(45) NOT NULL);
+
+
+CREATE TABLE facturation_preparation (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  code_client VARCHAR(45) NOT NULL,
+  nom_client VARCHAR(45) NOT NULL,
+  date date NOT NULL,
+  prep_jour VARCHAR(45) NOT NULL,
+  UM_jour VARCHAR(45) NOT NULL,
+  prep_nuit INT
+  UM_nuit  INT
+  prep_province  INT
+  UM_province INT
+  total_jour Float(45)
+  total_nuit Float(45)
+  total_province Float(45) 
+  diff_jour Float(45)
+  diff_nuit Float(45)
+  diff_province Float(45)
+  
+  );
+
+  CREATE TABLE Facturation_holidays (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  marge INT NOT NULL,
+  weekends VARCHAR(45) NOT NULL,
+  holidays VARCHAR(200) NOT NULL);
+
+CREATE TABLE conditionnement (
+  ID_CND INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  CODE_SOC VARCHAR(45),
+  TYPE_COND INT,
+  CODE_ARTICLE VARCHAR(45),
+  QTE Float(45)
+  );
+
+  CREATE TABLE transactions_livraison (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    start_date date,
+    end_date date,
+    statut VARCHAR(45),
+    fichier_livraison_sftp VARCHAR(100),
+    fichier_exception_sftp VARCHAR(100),
+    fichier_metadata_sftp VARCHAR(100),
+    fichier_mad_sftp VARCHAR(100), 
+    created_at date, 
+    modified_at date
+  );
+
+CREATE TABLE intervention_admin (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id_admin int,
+  id_file_edi int,
+  execution_time date
+)
+
+
+
+  public getFrais() {
+    this.fraisService.getAllPneumatique().subscribe(res => {
+        this.Pneumatique = res;
+        this.numPage = Math.ceil(res.length / this.countPerPage);
+        this.show = false;
+        this.CarburantTable = this.getAdvancedTablePage(1, this.countPerPage);
+      },
+        error => console.log(error));
+  }

@@ -1,0 +1,75 @@
+body {
+    padding-top: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  .mdl-data-table td:last-of-type, .mdl-data-table th:last-of-type {
+    padding-right: 6px;
+  }
+
+  .mdl-data-table__cell--non-numeric.mdl-data-table__cell--non-numeric {
+    text-align: center;
+    // max-width: 150px;
+    max-width: max-content ;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .dialog {
+    background: #444;
+    border: none;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+    width: 280px; }
+  .ui-tables {
+    .mdl-card,
+    .mdl-card__supporting-text {
+          overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+
+      td {
+        font-size: 14px;
+      }
+    }
+
+    .no-padding {
+      padding: 0;
+      width: 100%;
+    }
+
+    .label__availability {
+      margin-right: 2px;
+    }
+  }
+  .ui-tables table {
+    width: 100%;
+}
+table.table-list {
+  width: 100%;
+}
+.download {
+  padding-left: inherit;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+// .dialog-container-custom .mat-dialog-container {
+// 	overflow: hidden !important;
+// 	background: #444 !important;
+// }
+
+.mat-dialog-container {
+  background: #444 !important;
+  overflow: hidden !important;
+}
+// ::ng-deep.mat-dialog-container {
+//   background: red !important;
+// }
+.custom-modalbox {
+  mat-dialog-container {
+    background: #444 !important;
+     overflow: hidden !important;
+  }
+}

@@ -1,0 +1,75 @@
+<div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--6-col-phone">
+    <app-loader [width]="'100%'" [position]="'sticky'" [height]="'450px'" [bg]="'transparant'" [show]="showLowderListTransaction"></app-loader>
+    <base-card>
+      <base-card-title>
+        <h1 class="mdl-card__title-text">Liste des transactions</h1>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield-search mdl-js-textfield mdl-textfield--expandable search-table">
+          <div class="mdl-textfield label-search">
+            <input class="mdl-textfield__input" type="text" id="search2" (input)="setFilteredItems()"
+              [(ngModel)]="filterValue" placeholder="Rechercher" />
+            <label class="mdl-textfield__label" for="search2"></label>
+          </div>
+        </div>
+        <base-pagination [numPage]="numPage" [currentPage]="currentPage" (changePage)="changePage($event)">
+        </base-pagination>
+        <div id="conteneurDesBoutonsHeaderBaseCard">
+          <div class="boutonGenererTransaction">
+            <button (click)='gotoFacturationTransport()'
+            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal dialog-button "
+            style="margin-right: 5px;">Lancer Plans
+            </button>
+
+            <button (click)='openDialog()'
+            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal dialog-button ">Générer une transaction
+            </button>
+          </div>
+        </div>
+      </base-card-title>
+      <base-card-body *ngIf="advancedTable.length > 0" class="no-padding">
+        <table class="table-list mdl-data-table mdl-js-data-table sorting-table">
+          <thead>
+            <tr>
+              <th *ngFor="let header of advancedHeaders ; let i = index" class="mdl-data-table__cell--non-numeric"
+              (click)="changeSorting(header, i)">
+                <span>{{ header.name}}</span>
+                <i *ngIf="header.sort !== null " class="material-icons sorting"
+                  [class.asc]="header.sort === sortOrder.asc"
+                  [class.active]="header.sort === sortOrder.asc || header.sort === sortOrder.desc">sort</i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>   
+            <tr *ngFor="let row of advancedTable  | slice:0:limit; let i = index;">
+              <td class="mdl-data-table__cell--non-numeric">{{ row.created_at | mypipe: 31: "dd/MM/yyyy 'à' HH:mm"}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{ row.modified_at | mypipe: 31: "dd/MM/yyyy 'à' HH:mm"}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{ row.start_date | mypipe: 31: "dd/MM/yyyy"}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{ row.end_date | mypipe: 31: "dd/MM/yyyy"}}</td>              
+              <td class="mdl-data-table__cell--non-numeric">
+                <span class="label label--mini color--{{getColor(row.statut)}} border ">{{ row.statut}}</span>
+              </td>
+              <td *ngIf="row.fichier_exception_sftp==null && row.statut=='Terminé'" class="mdl-data-table__cell--non-numeric">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">warning</mat-icon>
+              </td>
+              <td *ngIf="row.fichier_exception_sftp!==null || row.statut!== 'Terminé'" class="mdl-data-table__cell--non-numeric">
+                <span ></span>
+              </td>
+
+              <td class="column-actions mdl-data-table__cell--non-numeric">
+                <button (click)="gotoDetails(row)" [disabled] = "row.statut !== 'Terminé'"
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal dialog-button"
+                >Détails
+                </button>
+                <!--"[disabled] = (row.statut !== 'Terminé')" -->
+                <button (click)="integrerTransaction(row.transaction_id)" [disabled] = "true" style="margin-left: 3px;"  
+                  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect button--colored-teal dialog-button">Intégrer
+                </button>
+              </td>
+              <app-loader *ngIf="row.statut== 'En attente'" class="loader" [width]="'100%'" [position]="'sticky'"
+              [height]="'182px'" [bg]="'transparant'" [show]="row.statut== 'En attente'"></app-loader>
+            </tr>
+          </tbody>
+        </table>
+      </base-card-body>
+    </base-card>
+  </div>

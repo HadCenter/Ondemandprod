@@ -1,0 +1,23 @@
+@import '~theme/helpers';
+
+@media screen and (max-width: $layout-screen-size-threshold) {
+  .mdl-layout__header {
+    display: flex !important;
+  }
+}
+
+img.logo-card {
+  margin-left: 30px;
+}
+
+span.app-title {
+    margin-left: 13px;
+}
+
+main.mdl-layout__content
+{
+  margin-left: 0px!important;
+}
+
+
+

@@ -1,0 +1,12 @@
+.labelnbrTotaleFichiers
+{
+  color: #00bcd4; /*color teal from palette du theme*/
+}
+app-loader.loaderTitle div div.child{
+  position: initial !important;
+  transform: translate(-7%, -28%);
+
+}
+.content-nb-import{
+  height: 75px;
+}
