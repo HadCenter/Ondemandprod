@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'websocket',
     'embededPowerBI',
     'facturation',
-    'fraivariables'
+    'fraivariables',
 ]
 
 MIDDLEWARE = [
